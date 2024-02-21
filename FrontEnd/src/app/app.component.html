@@ -1,0 +1,38 @@
+<div style="text-align:center">
+  <h1 class="mt-4">
+    Welcome to {{ title }}!
+  </h1>
+
+  <div class="mt-2">
+    <button type="button" class="btn btn-primary btn-sm" (click)="startGame()">Start New
+      Game</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary btn-sm" (click)="resetGame()">Reset Game</button>
+  </div>
+
+  <div class="mt-2">
+    <button type="button" class="btn btn-sm" [class.btn-light]="currentPlayer !== 1"
+      [class.btn-success]="currentPlayer === 1"> Player 1:
+      {{player1Score}}</button>
+
+    &nbsp;
+    <button type="button" class="btn btn-sm" [class.btn-light]="currentPlayer !== 2"
+      [class.btn-success]="currentPlayer === 2"> Player 2:
+      {{player2Score}}</button>
+
+  </div>
+
+  <div class="row mt-4">
+    <ng-container *ngIf="cards.length === 0">
+      <p> Start New game to see the cards. </p>
+    </ng-container>
+    <ng-container *ngIf="cards.length > 0">
+      <div class="col-1 mt-1" *ngFor="let card of cards">
+        <img [src]="card.isFlipped ? card.image : 'assets/gray_back.png'" (click)="takeTurn(card)"
+             [class.disabled-card]="card.isFlipped" class="img-fluid card-image" width="150"
+             height="200">
+      </div>
+
+    </ng-container>
+  </div>
+</div>
